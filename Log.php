@@ -2,6 +2,8 @@
 
 namespace SzamlaAgent;
 
+use Illuminate\Support\Facades\Config;
+
 /**
  * A Számla Agent naplózását végző osztály
  *
@@ -76,7 +78,7 @@ class Log {
      * @param string $fileName
      */
     protected function __construct($logPath = self::LOG_PATH, $fileName = self::LOG_FILENAME) {
-        $this->logPath = $logPath;
+        $this->logPath = Config::get('szamlazzHu.logFilePath') ?? $logPath;
         $this->logFileName = $fileName . '_' . date('Y-m-d') . '.log';
     }
 

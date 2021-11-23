@@ -2,6 +2,8 @@
 
 namespace SzamlaAgent;
 
+use Illuminate\Support\Facades\Config;
+
 /**
  * A Számla Agent közösen használt, hasznos funkcióinak osztálya
  *
@@ -148,7 +150,7 @@ class SzamlaAgentUtil {
         }
 
         $fileName  = $prefix . '-' . strtolower($name) . '-' . date('YmdHis') . '.xml';
-        return SzamlaAgent::XML_FILE_SAVE_PATH. DIRECTORY_SEPARATOR.$fileName;
+        return (Config::get('szamlazzHu.xmlFilePath') ?? SzamlaAgent::XML_FILE_SAVE_PATH) . DIRECTORY_SEPARATOR.$fileName;
     }
 
     /**

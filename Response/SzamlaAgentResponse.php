@@ -2,14 +2,13 @@
 
 namespace SzamlaAgent\Response;
 
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Storage;
 use SzamlaAgent\Document\Document;
 use SzamlaAgent\Log;
 use SzamlaAgent\SzamlaAgent;
 use SzamlaAgent\SzamlaAgentException;
 use SzamlaAgent\SzamlaAgentRequest;
 use SzamlaAgent\SzamlaAgentUtil;
+use Illuminate\Support\Facades\Config;
 
 /**
  * A Számla Agent választ kezelő osztály
@@ -185,13 +184,8 @@ class SzamlaAgentResponse
                             throw new SzamlaAgentException(SzamlaAgentException::DOCUMENT_DATA_IS_MISSING);
                         } else if (!empty($pdfData)) {
                             $this->setPdfFile($pdfData);
-
-
-                            /**
-                             * TODO ITT LEHET MEGADNI HOGY HOVA MENTSEN A PDF-EKET
-                             */
-                            $filePath = \config('pdfUploadSettings.Bills.pathOnDisc.storePath');
-                            $file = Storage::disk('local')->put($filePath.DIRECTORY_SEPARATOR.$this->getPdfFileName(), $pdfData);
+                            $filePath = (Config::get('szamlazzHu.pdfFilePath') . DIRECTORY_SEPARATOR) ?? SzamlaAgent::PDF_FILE_SAVE_PATH;
+                            $file = file_put_contents($filePath . $this->getPdfFileName(), $pdfData);
 
                             if ($file !== false) {
                                 $agent->writeLog(SzamlaAgentException::PDF_FILE_SAVE_SUCCESS . ': ' . $this->getPdfFileName(), Log::LOG_LEVEL_DEBUG);

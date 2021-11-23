@@ -14,7 +14,6 @@ use SzamlaAgent\Document\Invoice\FinalInvoice;
 use SzamlaAgent\Document\Invoice\PrePaymentInvoice;
 use SzamlaAgent\Response\SzamlaAgentResponse;
 
-
 /**
  * A Számla Agent inicializálását, az adatok küldését és fogadását kezelő osztály
  *
