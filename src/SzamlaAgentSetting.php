@@ -278,13 +278,13 @@ class SzamlaAgentSetting {
 
         switch ($request->getXmlName()) {
             case $request::XML_SCHEMA_CREATE_INVOICE:
-                $data = $this->buildFieldsData($request, array_merge($settings, ['eszamla', 'kulcstartojelszo', 'szamlaLetoltes', 'szamlaLetoltesPld', 'valaszVerzio', 'aggregator']));
+                $data = $this->buildFieldsData($request, array_merge($settings, ['eszamla', 'szamlaLetoltes', 'szamlaLetoltesPld', 'valaszVerzio', 'aggregator']));
                 break;
             case $request::XML_SCHEMA_DELETE_PROFORMA:
                 $data = $this->buildFieldsData($request, $settings);
                 break;
             case $request::XML_SCHEMA_CREATE_REVERSE_INVOICE:
-                $data = $this->buildFieldsData($request, array_merge($settings, ['eszamla', 'kulcstartojelszo', 'szamlaLetoltes', 'szamlaLetoltesPld', 'aggregator', 'valaszVerzio']));
+                $data = $this->buildFieldsData($request, array_merge($settings, ['eszamla', 'szamlaLetoltes', 'szamlaLetoltesPld', 'aggregator', 'valaszVerzio']));
                 break;
             case $request::XML_SCHEMA_PAY_INVOICE:
                 $data = $this->buildFieldsData($request, array_merge($settings, ['szamlaszam', 'additiv', 'aggregator', 'valaszVerzio']));
@@ -327,7 +327,6 @@ class SzamlaAgentSetting {
                 case 'felhasznalo':       $value = $this->getUsername(); break;
                 case 'jelszo':            $value = $this->getPassword(); break;
                 case 'szamlaagentkulcs':  $value = $this->getApiKey();   break;
-                case 'kulcstartojelszo':  $value = $this->getKeychain(); break;
                 case 'szamlaLetoltes':
                 case 'pdf':
                 case 'pdfLetoltes':       $value = $this->isDownloadPdf(); break;
